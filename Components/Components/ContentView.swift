@@ -2,7 +2,7 @@ import SwiftUI
 
 // This component creates an iMessage-style confetti animation when a button is pressed.
 // The button is designed as a floating action button with a plus icon.
-// The confetti animation is triggered when the button is pressed.
+// The confetti animation is triggered when the button is pressed and falls from top to bottom under gravity.
 
 struct ContentView: View {
     // 1. Create a state property to control the confetti animation.
@@ -57,6 +57,9 @@ struct ConfettiView: View {
                         .frame(width: CGFloat.random(in: 5...10), height: CGFloat.random(in: 20...30))
                         .position(x: CGFloat.random(in: 0...geometry.size.width), y: CGFloat.random(in: 0...geometry.size.height))
                         .rotationEffect(.degrees(Double.random(in: 0...360)))
+                        // 2. Add gravity and animation to make the confetti fall from top to bottom.
+                        .animation(Animation.interpolatingSpring(stiffness: 50, damping: 10).delay(Double.random(in: 0...1)))
+                        .offset(y: geometry.size.height)
                 }
             }
         }
